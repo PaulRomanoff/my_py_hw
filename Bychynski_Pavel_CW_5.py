@@ -147,6 +147,6 @@ for name in sorted(school_class.keys()):
     adding = 0
     counter = 0
     for score in school_class[name]:
-        adding += scoregit 
+        adding += scoregit
         counter += 1
     print(name, ":", adding / counter)

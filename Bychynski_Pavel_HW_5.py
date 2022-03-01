@@ -74,24 +74,43 @@ def display_board(board = board):
         print("|       " * 3, "|", sep="")
         print("+-------" * 3, "+", sep="")
 
-def user_turn(board = board, checklist = checklist):
-        for row in board:
-            for element in row:
-                if type(element) == int not in row:
-                    break
-                else:
-                    u_turn = int(input("enter the number of nonmaked box U want to mark: "))
-                    if u_turn not in range (1, 10) or type(u_turn) != int or u_turn not in checklist:
-                        print("incorrect box number")
-                        continue
-                    else:
-                        for row_ch in board:
-                            for element_ch in row_ch:
-                                if element_ch == u_turn:
-                                    board[row_ch][element_ch] = "O"
-                            for c_elem in checklist:
-                                if c_elem == u_turn:
-                                    checklist[c_elem] = "O"
+# this function don't even call input
+# def user_turn(board = board, checklist = checklist):
+#         for row in board:
+#             for element in row:
+#                 if type(element) == int not in row:
+#                     break
+#                 else:
+#                     u_turn = int(input("enter the number of nonmaked box U want to mark: "))
+#                     if u_turn not in range (1, 10) or type(u_turn) != int or u_turn not in checklist:
+#                         print("incorrect box number")
+#                         continue
+#                     else:
+#                         for row in board:
+#                             for element in row_ch:
+#                                 if element == u_turn:
+#                                     board[row][element] = "O"
+#                             for c_elem in checklist:
+#                                 if c_elem == u_turn:
+#                                     checklist[c_elem] = "O"
+
+# this function calls input but can't overwrite board list
+def user_turn(board=board, checklist=checklist):
+    for element in board:
+        if type(element) == int not in board:
+            break
+        else:
+            u_turn = int(input("enter the number of nonmaked box U want to mark: "))
+            if u_turn not in range(1, 10) or type(u_turn) != int or u_turn not in checklist:
+                print("incorrect box number")
+                continue
+            else:
+                for element in board:
+                    if element == u_turn:
+                        board[element] = "O"
+                for c_elem in checklist:
+                    if c_elem == u_turn:
+                        checklist[c_elem] = "O"
 
 def comp_turn(board = board, checklist = checklist):
     import random
