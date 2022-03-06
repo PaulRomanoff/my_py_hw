@@ -74,83 +74,78 @@ def display_board(board = board):
         print("|       " * 3, "|", sep="")
         print("+-------" * 3, "+", sep="")
 
-# this function don't even call input
-# def user_turn(board = board, checklist = checklist):
-#         for row in board:
-#             for element in row:
-#                 if type(element) == int not in row:
-#                     break
-#                 else:
-#                     u_turn = int(input("enter the number of nonmaked box U want to mark: "))
-#                     if u_turn not in range (1, 10) or type(u_turn) != int or u_turn not in checklist:
-#                         print("incorrect box number")
-#                         continue
-#                     else:
-#                         for row in board:
-#                             for element in row_ch:
-#                                 if element == u_turn:
-#                                     board[row][element] = "O"
-#                             for c_elem in checklist:
-#                                 if c_elem == u_turn:
-#                                     checklist[c_elem] = "O"
-
-# this function calls input but can't overwrite board list
+# function for users turns
 def user_turn(board=board, checklist=checklist):
-    for element in board:
-        if type(element) == int not in board:
-            break
+    turn_check = True
+    while turn_check:
+        u_turn = int(input("enter the number of nonmaked box U want to mark: "))
+        if u_turn not in checklist:
+            print("incorrect box number")
+            continue
         else:
-            u_turn = int(input("enter the number of nonmaked box U want to mark: "))
-            if u_turn not in range(1, 10) or type(u_turn) != int or u_turn not in checklist:
-                print("incorrect box number")
-                continue
-            else:
-                for element in board:
-                    if element == u_turn:
-                        board[element] = "O"
-                for c_elem in checklist:
-                    if c_elem == u_turn:
-                        checklist[c_elem] = "O"
+            turn_check = False
+            checklist[u_turn - 1] = "O"
+            if (u_turn - 1) // 3 == 0:
+                big_l = 0
+            elif (u_turn - 1 )// 3 == 1:
+                big_l = 1
+            elif (u_turn - 1) // 3 == 2:
+                big_l = 2
+            if u_turn % 3 == 1:
+                mini_l = 0
+            elif u_turn % 3 == 2:
+                mini_l = 1
+            elif u_turn % 3 == 0:
+                mini_l = 2
+            board[big_l][mini_l] = "O"
 
+# program random turns
 def comp_turn(board = board, checklist = checklist):
     import random
-    for row in board:
-        for element in row:
-            if type(element) == int not in row:
-                break
-            else:
-                c_turn = random.randint(1, 10)
-                if c_turn not in row:
-                    continue
-                else:
-                    for row in board:
-                        for elem in row:
-                            if elem == c_turn:
-                                board[row][elem] = "X"
-                        for c_elem in checklist:
-                            if c_elem == c_turn:
-                                checklist[c_elem] = "X"
+    c_turn_check = True
+    while c_turn_check:
+        c_turn = random.randint(1, 10)
+        if c_turn not in checklist:
+            continue
+        else:
+            c_turn_check = False
+            checklist[c_turn - 1] = "X"
+            if (c_turn - 1) // 3 == 0:
+                big_l = 0
+            elif (c_turn - 1 )// 3 == 1:
+                big_l = 1
+            elif (c_turn - 1) // 3 == 2:
+                big_l = 2
+            if c_turn % 3 == 1:
+                mini_l = 0
+            elif c_turn % 3 == 2:
+                mini_l = 1
+            elif c_turn % 3 == 0:
+                mini_l = 2
+            board[big_l][mini_l] = "X"
 
-
+def win_check(checklist = checklist):
+    win_b = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
+    for each in win_b:
+        if checklist[each[0]] == checklist[each[1]] == checklist[each[2]]:
+            return print(checklist[each[0]], "win")
+            break
+    return False
 
 display_board()
 board[1][1] = "X"
 checklist[4] = "X"
-print(board)
-print(checklist)
 display_board()
 user_turn()
-print(board)
-print(checklist)
-display_board()
+for t_numb in range(1, 4):
+    display_board()
+    comp_turn()
+    win_check()
+    display_board()
+    user_turn()
+    win_check()
 comp_turn()
-
-    # for t_numb in range(1, 5):
-    #     print(board)
-    #     print(checklist)
-    #     display_board()
-    #     user_turn()
-    #     print(board)
-    #     print(checklist)
-    #     display_board()
-    #     comp_turn()
+display_board()
+print(checklist)
+print(board)
+win_check()
