@@ -11,8 +11,8 @@ class Timer:
         except:
             print("something where wrong - setting default values")
 
-    def __str__(self):
-        return self.h, self.m,  self.s
+    # def __str__(self):
+    #     return self.h, self.m,  self.s
 
     def next_s(self):
         if self.s != 59:
@@ -42,14 +42,14 @@ class Timer:
                 else:
                     self.h = 23
 
-    # def s_dual(self, val):
-    #     s = str(val)
-    #     if len(s) == 1:
-    #         s = "0" + s
-    #     return s
-    #
-    # def __str__(self):
-    #     return Timer.s_dual(self.h), Timer.s_dual(self.m), Timer.s_dual(self.s)
+    def s_dual(self, val):
+        s = str(val)
+        if len(s) == 1:
+            s = "0" + s
+        return s
+
+    def __str__(self):
+        return Timer.s_dual(self.h, self.h), Timer.s_dual(self.m, self.m), Timer.s_dual(self.s, self.s)
 
 
 
