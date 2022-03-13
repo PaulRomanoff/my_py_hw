@@ -49,7 +49,7 @@ class Timer:
         return s
 
     def __str__(self):
-        return Timer.s_dual(self.h, self.h), Timer.s_dual(self.m, self.m), Timer.s_dual(self.s, self.s)
+        return Timer.s_dual(self.h, self.h) + ":" + Timer.s_dual(self.m, self.m) + ":" + Timer.s_dual(self.s, self.s)
 
 
 
