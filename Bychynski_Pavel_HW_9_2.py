@@ -1,15 +1,17 @@
 # pizza time
-''' Unique error for pizza issues '''
+''' Unique error for pizza issues instead any exceptions '''
 class PizzaError(Exception):
     def __init__(self, pizza, message):
         Exception.__init__(self, message)
         self.pizza = pizza
 
+''' Subclass for cheese errors '''
 class TooMuchCheeseError(PizzaError):
     def __init__(self, pizza, cheese, message):
         PizzaError.__init__(self, pizza, message)
         self.cheese = cheese
 
+''' Main class for generating pizzas from list '''
 class Pizza():
     def make_pizza(self, pizza, cheese):
         if pizza not in ["margherita", "capricciosa", "calzone"]:
