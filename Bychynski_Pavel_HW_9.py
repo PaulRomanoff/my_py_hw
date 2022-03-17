@@ -3,29 +3,32 @@
 class Queue:
     def __init__(self):
         # List that serves as stack
-        self.__Stack_list = []
+        self.Stack_list = []
 
     # Adding elements
     def put(self, val):
-        self.__Stack_list.append(val)
+        self.Stack_list.append(val)
 
     # Deleting elements
     def get(self):
-        val = self.__Stack_list[-1]
-        del self.__Stack_list[-1]
-        return val
+        try:
+            val = self.Stack_list[-1]
+            del self.Stack_list[-1]
+            return val
 
     def __str__(self):
-        return self.__Stack_list
+        return self.Stack_list
 
 class QueueError(IndexError):
-    pass
+    def __init__(self, msg):
+        IndexError.__init__(msg)
+        pass
 
-    def is_el_en(self, trig):
-        if trig:
-            raise QueueError
-        else:
-            raise IndexError
+# def is_el_en(trig):
+#     if trig:
+#         raise QueueError
+#     else:
+#         raise IndexError
 
 
 que = Queue()
@@ -37,4 +40,4 @@ try:
     for i in range(4):
         print(que.get())
 except IndexError:
-    QueueError.is_el_en(3 - 4)
+    raise QueueError
